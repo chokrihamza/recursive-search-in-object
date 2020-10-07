@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Document</title>
+</head>
+<body>
+  <script>
+let company = { // the same object, compressed for brevity
+  sales: [{name: 'John', salary: 1000}, {name: 'Alice', salary: 1600 }],
+  development: {
+    sites: [{name: 'Peter', salary: 2000}, {name: 'Alex', salary: 1800 }],
+    internals: [{name: 'Jack', salary: 1300}]
+  }
+};
+// The function to do the job
+function sumSalaries(department){
+  //case1
+  if(Array.isArray(department)){
+    return department.reduce((prev,current)=>prev+current.salary,0) //sum the array,
+  }else{
+    let sum=0;
+    for(let subdep of Object.values(department)){
+      sum+=sumSalaries(subdep);
+    }
+    return sum;
+  }
+}
+console.log(sumSalaries(company));
+  </script>
+</body>
+</html>
